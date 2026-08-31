@@ -68,6 +68,10 @@ Non-goals: a reusable horse-animation library, physically accurate biomechanics,
 
 Ultimately, this could become a small library of cinematic, code-authored short films. Today it remains intentionally experimental.
 
+## Versioning and agent help
+
+`package.json` is the canonical version source (`0.1.0`); compatible fixes use patch versions and new supported compositions use minor versions. Release notes live in [`CHANGELOG.md`](CHANGELOG.md). Before editing, agents should inspect `src/Root.tsx`, the existing render, and media provenance; they may help triage, test, document, and implement accepted issues, while maintainers review and merge.
+
 ## ⚠️ Caveats
 
 - Rendering requires the installed Remotion toolchain and can be CPU-intensive.
@@ -78,6 +82,8 @@ Ultimately, this could become a small library of cinematic, code-authored short 
 ## 🤝 Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md). Focused visual improvements, performance fixes, and documentation corrections are welcome. Please keep generated caches and unrelated media out of commits.
+
+Open issues with a reproducible command or visual example. Pull requests should include the smallest relevant render or validation evidence. No Bilibili upload or arXiv submission is planned; the checked-in MP4 is the existing render artifact.
 
 ## License
 
