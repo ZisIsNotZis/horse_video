@@ -9,6 +9,10 @@
   <a href="package.json"><img src="https://img.shields.io/badge/Remotion-4.0.490-0b7285" alt="Remotion 4.0.490"></a>
 </p>
 
+> **Status: closed (milestone, 2026-09-29).** A finished code-authored art
+> experiment with a checked-in render. No further development is planned unless
+> the project's inputs or goals change.
+
 ## ⚡ What it is
 
 Horse Video is a compact motion-design playground for rendering a stylized horse galloping through a grass field. It uses **deterministic procedural motion**, layered SVG scenery, camera movement, dust, speed streaks, Three.js geometry, and a WAV soundtrack to produce a finished **1280×720 / 30 fps / 15-second** MP4.
@@ -60,13 +64,15 @@ Goals: learn expressive procedural animation, keep the scene inspectable in code
 
 Non-goals: a reusable horse-animation library, physically accurate biomechanics, a web app, or a production render farm.
 
-## 🗺 Roadmap
+## 🗺 Roadmap (deferred)
+
+These were considered but are not required for the closed milestone:
 
 - Add a small composition selector for the existing melon scene.
 - Capture a lightweight preview GIF or still frame for the README.
 - Extract reusable scene parameters if a second animation makes that worthwhile.
 
-Ultimately, this could become a small library of cinematic, code-authored short films. Today it remains intentionally experimental.
+Today it remains intentionally a single, finished art experiment.
 
 ## Versioning and agent help
 
