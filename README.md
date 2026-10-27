@@ -1,96 +1,109 @@
-<p align="center"><img src="logo.svg" width="112" alt="Horse Video logo"></p>
+<p align="center"><img src="logo.svg" width="112" alt="Horse Video logo: a horse silhouette galloping across a sunset disk"></p>
 <h1 align="center">Horse Video</h1>
-<p align="center"><strong>A cinematic horse-running animation built entirely with React, SVG, Three.js, and Remotion.</strong></p>
+<p align="center"><strong>A 15-second cinematic horse gallop, drawn frame by frame in TypeScript.</strong></p>
+<p align="center"><sub>React · SVG · Three.js · Remotion — no timeline editor, no imported character rig.</sub></p>
 <p align="center"><a href="README.zh-CN.md">简体中文</a> · English</p>
 
 <p align="center">
-  <a href="https://github.com/zisisnotzis/horse_video"><img src="https://img.shields.io/badge/status-experiment-d88945" alt="Status: experiment"></a>
-  <a href="LICENSE"><img src="https://img.shields.io/badge/license-AGPL--3.0--only-8b5cf6" alt="AGPL-3.0-only"></a>
-  <a href="package.json"><img src="https://img.shields.io/badge/Remotion-4.0.490-0b7285" alt="Remotion 4.0.490"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-AGPL--3.0--only-8b5cf6" alt="License: AGPL-3.0-only"></a>
+  <a href="docs/project-status.md"><img src="https://img.shields.io/badge/status-finished%20experiment-d88945" alt="Status: finished experiment"></a>
 </p>
 
-> **Status: closed (milestone, 2026-09-29).** A finished code-authored art
-> experiment with a checked-in render. No further development is planned unless
-> the project's inputs or goals change.
+A horse runs across a wind-blown field at sunset. Every blade of grass, every
+dust particle, the gait, the camera push and the grade are generated from code,
+so the same input always produces the same film — and the whole scene stays
+readable and editable as a single TypeScript file.
 
-## ⚡ What it is
+## ▶ Watch it
 
-Horse Video is a compact motion-design playground for rendering a stylized horse galloping through a grass field. It uses **deterministic procedural motion**, layered SVG scenery, camera movement, dust, speed streaks, Three.js geometry, and a WAV soundtrack to produce a finished **1280×720 / 30 fps / 15-second** MP4.
+The finished render is checked in: **[render/horse-run-remotion.mp4](render/horse-run-remotion.mp4)**
+(1280×720, 30 fps, 15 s, H.264). Open or download it from the repository; it is
+the exact output of the commands below.
 
-The goal is to explore how far a small, code-driven scene can go without a traditional timeline editor or imported character rig. It is an **art experiment**, not a general animation framework.
+## ⚡ Quick start
 
-🎬 [Watch the rendered preview](render/horse-run-remotion.mp4)
-
-## ✨ Why this approach
-
-- **Reproducible:** seeded vegetation and dust keep renders stable between runs.
-- **Programmable:** gait, parallax, lighting, camera shake, and composition timing live in TypeScript.
-- **Self-contained:** the active scene is drawn from SVG/Three.js primitives and one local audio track.
-- **Fast to iterate:** preview in Remotion Studio, then render a standard H.264 export.
-
-## 🚀 Quick start
-
-Requirements: Node.js 18+ and npm. The checked-in `package-lock.json` pins the dependency graph.
+Requires Node.js 18+ and npm. `package-lock.json` pins the dependency graph.
 
 ```bash
 npm ci
 npm run studio
 ```
 
-Open the local Remotion Studio URL and select `HorseRun`. To render the current composition:
+Remotion Studio opens locally with the `HorseRun` composition ready to scrub.
+To produce the MP4:
 
 ```bash
-npm run render
+npm run render   # writes render/horse-run-remotion.mp4
 ```
 
-The output is written to `render/horse-run-remotion.mp4` and is configured as H.264, YUV 4:2:0, **1280×720**, 30 fps.
+## ✨ What it can do now
 
-## 🧭 How it works
+- **One command, one film.** A 450-frame, 1280×720, 30 fps composition exported as H.264 / YUV 4:2:0.
+- **Procedural scenery.** 900 distant and 620 near grass blades, 170 dust motes, speed streaks and wind, all seeded so renders stay stable.
+- **A hand-built horse rig.** Layered SVG body and legs with motion blur, rim light, contact shadow, and a four-beat gallop that follows the camera.
+- **3D depth.** A Three.js layer adds geometry and atmosphere under the SVG foreground.
+- **Programmable cinematography.** Camera interpolation, shake, lighting pulses, colour grade and audio levels are ordinary constants and easing curves.
+- **Sound included.** `public/audio/horse-run-remotion-audio.wav` is mixed in at render time.
 
-- `src/Root.tsx` registers the `HorseRun` composition and its **450 frames**.
-- `src/HorseRun.tsx` combines procedural SVG layers, a hand-built horse rig, camera interpolation, grading, and audio.
-- `public/audio/horse-run-remotion-audio.wav` supplies the soundtrack.
-- `remotion.config.ts` sets JPEG frames, overwrite behavior, H.264, and pixel format.
+## 🧭 Architecture
 
-`src/HorseRun.tsx` also contains an experimental `HuaqiangMelon` composition and related audio assets. It is not part of the current Studio registry; wire it into `Root.tsx` before treating it as a supported output.
+| Path | Role |
+| --- | --- |
+| `src/index.ts` | Registers the Remotion root. |
+| `src/Root.tsx` | Declares the `HorseRun` composition: 450 frames, 30 fps, 1280×720. |
+| `src/HorseRun.tsx` | The scene: seeded scenery, horse rig, camera, Three.js layer, grading, audio, plus an experimental `HuaqiangMelon` composition. |
+| `public/audio/` | Soundtrack and the unused-by-default melon-scene audio assets. |
+| `render/` | The checked-in output of `npm run render`. |
+| `remotion.config.ts` | JPEG frames, overwrite, H.264, `yuv420p`. |
+| `logo.svg` | The mark shown above. |
 
-## 🛠 Advanced customization
+`HuaqiangMelon` exists in `src/HorseRun.tsx` but is not registered in
+`src/Root.tsx`; wire it in before treating it as a supported output.
 
-Edit the constants and interpolation ranges in `src/HorseRun.tsx` to tune gait speed, camera path, grass density, atmosphere, or grading. Replace the audio file while keeping the `staticFile` path, or add another `Composition` in `src/Root.tsx` for a new cut.
+## 🛠 Develop
 
-## 🎯 Goals and non-goals
+| Command | What it does |
+| --- | --- |
+| `npm ci` | Install the locked dependency graph. |
+| `npm run studio` | Preview and scrub the composition in Remotion Studio. |
+| `npm run render` | Render `HorseRun` to `render/horse-run-remotion.mp4`. |
+| `npm run typecheck` | Type-check `src/` with `tsc --noEmit`. |
 
-Goals: learn expressive procedural animation, keep the scene inspectable in code, and produce attractive repeatable renders.
-
-Non-goals: a reusable horse-animation library, physically accurate biomechanics, a web app, or a production render farm.
-
-## 🗺 Roadmap (deferred)
-
-These were considered but are not required for the closed milestone:
-
-- Add a small composition selector for the existing melon scene.
-- Capture a lightweight preview GIF or still frame for the README.
-- Extract reusable scene parameters if a second animation makes that worthwhile.
-
-Today it remains intentionally a single, finished art experiment.
-
-## Versioning and agent help
-
-`package.json` is the canonical version source (`0.1.0`); compatible fixes use patch versions and new supported compositions use minor versions. Release notes live in [`CHANGELOG.md`](CHANGELOG.md). Before editing, agents should inspect `src/Root.tsx`, the existing render, and media provenance; they may help triage, test, document, and implement accepted issues, while maintainers review and merge.
-
-## ⚠️ Caveats
-
-- Rendering requires the installed Remotion toolchain and can be CPU-intensive.
-- Visual output depends on the exact font/dependency versions in the lockfile.
-- The included MP4 is a generated preview and may be replaced by a fresh render.
-- Audio and visual timing are hand-authored; there is no automated lip-sync or physics simulation.
+Tuning happens by editing the constants and `interpolate` ranges in
+`src/HorseRun.tsx`: gait speed, camera path, grass density, atmosphere, grade.
+Swap the soundtrack while keeping the `staticFile` path, or add another
+`<Composition>` in `src/Root.tsx` for a new cut. Rendering is CPU-intensive;
+the checked-in MP4 is the reference output, not a build artifact you must
+regenerate to read the code.
 
 ## 🤝 Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md). Focused visual improvements, performance fixes, and documentation corrections are welcome. Please keep generated caches and unrelated media out of commits.
+See [CONTRIBUTING.md](CONTRIBUTING.md). Focused visual improvements,
+performance fixes and documentation corrections are welcome. Please keep
+caches and unrelated media out of commits, and say what changed visually in
+your pull request.
 
-Open issues with a reproducible command or visual example. Pull requests should include the smallest relevant render or validation evidence. No Bilibili upload or arXiv submission is planned; the checked-in MP4 is the existing render artifact.
+## 🗺 Roadmap
+
+**Implemented**
+
+- `HorseRun` — 15 s galloping scene with procedural grass, dust, streaks, Three.js depth, camera work, grade and audio.
+- Deterministic seeded generation, so repeated renders match.
+- A checked-in 1280×720 / 30 fps MP4 and a reproducible `npm run render` path.
+- Project docs: [status](docs/project-status.md), [changelog](CHANGELOG.md), [contributing](CONTRIBUTING.md), [security](SECURITY.md).
+
+**Planned (deferred, not promised)**
+
+- Register the experimental `HuaqiangMelon` composition in `src/Root.tsx` behind a small selector.
+- Add a still frame or short GIF so the README shows the film without a download.
+- Extract reusable scene parameters, but only if a second animation makes it worthwhile.
+
+This is deliberately one finished art experiment, not a framework. If it grows,
+the natural next step is a small set of code-authored cinematic shorts sharing
+the same seeded-scenery approach — each self-contained, each inspectable as
+source, none depending on a timeline editor.
 
 ## License
 
-Source code is available under the [GNU AGPL v3.0-only](LICENSE). Review the repository contents and media provenance before redistributing rendered assets.
+Source code is licensed under [AGPL-3.0-only](LICENSE). Review media and font
+provenance before redistributing rendered output.
