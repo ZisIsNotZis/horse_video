@@ -1,23 +1,17 @@
+# Dependencies
 node_modules/
-.DS_Store
+
+# Build output and Remotion cache
+dist/
+build/
+out/
+.remotion/
+
+# Environment and secrets
 .env
 .env.*
 !.env.example
-dist/
-out/
-.remotion/
+
+# Local tooling and OS noise
 *.log
-
-
-# Common local caches and temporary workspaces
-__pycache__/
-.pi/
-.tmp/
-worktrees/
-.worktrees/
-
-# Local secrets, test caches, and generated logs
-.pytest_cache/
-.ruff_cache/
-.mypy_cache/
-.cache/
+.DS_Store
