@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "studio": "remotion studio --no-open",
-    "render": "remotion render src/index.ts HorseRun render/horse-run-remotion.mp4"
+    "render": "remotion render src/index.ts HorseRun render/horse-run-remotion.mp4",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@fontsource/noto-sans-sc": "5.2.9",
