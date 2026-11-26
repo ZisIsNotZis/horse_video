@@ -2,6 +2,9 @@
 
 <p align="center"><img src="logo.svg" width="112" alt="Horse Video logo: a horse silhouette galloping across a sunset disk"></p>
 <h1 align="center">Horse Video</h1>
+
+**项目状态 · 已完成（2026-11-26）**。已封板创意作品；远端 MP4 真解码成功，1280×720 H.264 30fps，AAC 双声道，容器全长 15.06s。 [验收记录](COMPLETION.md)。
+
 <p align="center"><strong>A 15-second cinematic horse gallop, drawn frame by frame in TypeScript.</strong></p>
 <p align="center"><sub>A low-poly horse and its straw-hat rider at sunset — React · Three.js · SVG · Remotion, no timeline editor, no imported character rig.</sub></p>
 
